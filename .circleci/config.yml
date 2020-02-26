@@ -1,6 +1,7 @@
 version: 2
 
 # https://jtway.co/deploying-jekyll-to-github-pages-with-circleci-2-0-3eb69324bc6e
+# https://willschenk.com/articles/2018/automating_hugo_with_circleci/
 
 workflows:
   version: 2
@@ -15,16 +16,27 @@ jobs:
   deploy:
     docker:
       - image: circleci/ruby:2.4.3-node-browsers
+    working_directory: ~/source
+    environment:
+      BUILD_DIR: ~/source/_site
     steps:
       - checkout
-      # - run: npm install
       - add_ssh_keys:
           fingerprints:
             - "2e:29:18:57:4b:ff:d2:86:75:18:58:cd:a3:c4:45:0b"
+      - run:
+          name: Prepare Git Initialization
+          command: |
+            git config user.email "ci-build@example.domain"
+            git config user.name "ci-build"
+            rm -rf $BUILD_DIR && git worktree add -B gh-pages $BUILD_DIR origin/gh-pages
       - run: bundle install
       - run: bundle exec jekyll build
       - deploy:
           name: Deploy Release to GitHub
-          command: bash .circleci/setup-github.sh
-
-
+          command: |
+            cd $BUILD_DIR
+            git add --all
+            git commit --allow-empty -m "[ci skip] $(git log master -1 --pretty=%B)"
+            git push origin gh-pages
+            echo "deployed successfully"

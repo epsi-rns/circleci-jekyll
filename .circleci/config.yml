@@ -37,8 +37,8 @@ jobs:
           name: Precheck
           command: |
             cd $BUILD_DIR
-            ls -l
             mv ~/source/_site/* .
+            ls -l
             touch .nojekyll
       - deploy:
           name: Deploy Release to GitHub

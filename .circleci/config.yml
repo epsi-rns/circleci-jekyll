@@ -43,8 +43,10 @@ jobs:
       - deploy:
           name: Deploy Release to GitHub
           command: |
+            cd $BUILD_DIR
             git add --all
+            echo "[status]"
             git status
             git commit --allow-empty -m "[ci skip] $(git log master -1 --pretty=%B)"
             git push
-            echo "deployed successfully"
+            echo "[deployed successfully]"

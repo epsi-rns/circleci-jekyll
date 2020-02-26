@@ -1,3 +1,5 @@
+# https://jtway.co/deploying-jekyll-to-github-pages-with-circleci-2-0-3eb69324bc6e
+
 git config user.name "ci-build@example.domain"
 git config user.email "ci-build"
 touch ~/.nojekyll

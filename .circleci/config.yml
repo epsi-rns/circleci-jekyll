@@ -1,4 +1,7 @@
 version: 2
+
+# https://jtway.co/deploying-jekyll-to-github-pages-with-circleci-2-0-3eb69324bc6e
+
 jobs:
   deploy:
     docker:

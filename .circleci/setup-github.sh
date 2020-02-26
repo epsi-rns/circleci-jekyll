@@ -15,7 +15,7 @@ mv _site/* .
 rm -R _site/
 
 git add -fA
-git commit --allow-empty -m "$(git log master -1 --pretty=%B)"
+git commit --allow-empty -m "[ci skip] $(git log master -1 --pretty=%B)"
 git push origin gh-pages
 
 echo "deployed successfully"

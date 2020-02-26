@@ -15,7 +15,8 @@ workflows:
 jobs:
   deploy:
     docker:
-      - image: circleci/ruby:2.4.3-node-browsers
+      # - image: circleci/ruby:2.4.3-node-browsers
+      - image: circleci/ruby:2.4
     working_directory: ~/source
     environment:
       BUILD_DIR: ~/source/_site

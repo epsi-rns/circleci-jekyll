@@ -40,5 +40,5 @@ jobs:
             ls -l
             git add --all
             git commit --allow-empty -m "[ci skip] $(git log master -1 --pretty=%B)"
-            git push origin gh-pages
+            git push
             echo "deployed successfully"

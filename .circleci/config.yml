@@ -15,7 +15,7 @@ workflows:
 jobs:
   deploy:
     docker:
-      # - image: circleci/ruby:2.4.3-node-browsers
+      # Choose Image that Support Git Worktree Command
       - image: circleci/ruby:2.4
     working_directory: ~/source
     environment:
@@ -25,11 +25,6 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "2e:29:18:57:4b:ff:d2:86:75:18:58:cd:a3:c4:45:0b"
-      #- run:
-      #    name: Update Git to Support Worktree Command
-      #    command: |
-      #      sudo apt update
-      #      sudo apt install git
       - run:
           name: Prepare Git Initialization
           command: |
@@ -42,6 +37,7 @@ jobs:
           name: Deploy Release to GitHub
           command: |
             cd $BUILD_DIR
+            ls -l
             git add --all
             git commit --allow-empty -m "[ci skip] $(git log master -1 --pretty=%B)"
             git push origin gh-pages

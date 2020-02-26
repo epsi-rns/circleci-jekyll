@@ -19,7 +19,7 @@ jobs:
       - image: circleci/ruby:2.4
     working_directory: ~/source
     environment:
-      BUILD_DIR: ~/source/_site
+      BUILD_DIR: ~/public
     steps:
       - checkout
       - add_ssh_keys:
@@ -34,9 +34,13 @@ jobs:
       - run: bundle install
       - run: bundle exec jekyll build
       - deploy:
-          name: Deploy Release to GitHub
+          name: Precheck
           command: |
             cd $BUILD_DIR
+            ls -l
+      - deploy:
+          name: Deploy Release to GitHub
+          command: |
             git add --all
             git status
             git commit --allow-empty -m "[ci skip] $(git log master -1 --pretty=%B)"

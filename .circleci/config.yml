@@ -38,6 +38,8 @@ jobs:
           command: |
             cd $BUILD_DIR
             ls -l
+            mv ~/source/_site/* .
+            touch .nojekyll
       - deploy:
           name: Deploy Release to GitHub
           command: |

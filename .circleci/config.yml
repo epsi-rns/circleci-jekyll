@@ -16,7 +16,10 @@ jobs:
       - run: bundle exec jekyll build
       - deploy:
           name: Deploy Release to GitHub
-          command: bash .circleci/setup-github.sh
+          command: |
+            if [ $CIRCLE_BRANCH == 'master' ]; then
+              bash .circleci/setup-github.sh
+            fi
 
 workflows:
   version: 2

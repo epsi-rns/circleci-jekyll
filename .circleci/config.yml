@@ -6,14 +6,15 @@ jobs:
     steps:
       - checkout
       # - run: npm install
+      - add_ssh_keys:
+          fingerprints:
+            - "2e:29:18:57:4b:ff:d2:86:75:18:58:cd:a3:c4:45:0b"
       - run: bundle install
       - run: bundle exec jekyll build
       - deploy:
           name: Deploy Release to GitHub
-          command: |
-            if [ $CIRCLE_BRANCH == 'master' ]; then
-              bash .circleci/setup-github.sh
-            fi
+          command: bash .circleci/setup-github.sh
+
 workflows:
   version: 2
   build:

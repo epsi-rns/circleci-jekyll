@@ -1,7 +1,7 @@
 git config user.name "$USER_NAME"
 git config user.email "$USER_EMAIL"
 
-git checkout gh-pages
+git checkout -b gh-pages
 git pull origin gh-pages
 
 find . -maxdepth 1 ! -name '_site' ! -name '.git' ! -name '.gitignore' -exec rm -rf {} \;

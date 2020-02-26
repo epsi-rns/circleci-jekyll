@@ -25,11 +25,11 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "2e:29:18:57:4b:ff:d2:86:75:18:58:cd:a3:c4:45:0b"
-      - run:
-          name: Update Git to Support Worktree Command
-          command: |
-            sudo apt update
-            sudo apt add git
+      #- run:
+      #    name: Update Git to Support Worktree Command
+      #    command: |
+      #      sudo apt update
+      #      sudo apt install git
       - run:
           name: Prepare Git Initialization
           command: |

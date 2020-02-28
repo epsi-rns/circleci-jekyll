@@ -24,18 +24,27 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "2e:29:18:57:4b:ff:d2:86:75:18:58:cd:a3:c4:45:0b"
+            - "dc:18:73:7a:1a:a7:5f:92:31:67:cb:20:eb:0f:77:31"
       - run:
           name: Prepare Git Initialization
           command: |
             git config user.email "ci-build@example.domain"
             git config user.name "ci-build"
-            git worktree add -B gh-pages $BUILD_DIR origin/gh-pages
+            git branch -a -l | cat
+            if [ $(git branch -a -l | grep gh-pages | wc -l) -eq "0" ]; then
+              echo "Create gh-pages for the first time"
+              git checkout -b gh-pages
+              git commit --allow-empty -m "Create gh-pages for the first time"
+              git push --set-upstream origin gh-pages
+              git checkout master
+            fi
       - run: bundle install
       - run: bundle exec jekyll build
       - deploy:
           name: Output Precheck
           command: |
+            git worktree add -B gh-pages $BUILD_DIR origin/gh-pages
+            git worktree list
             cd $BUILD_DIR
             ls -lah
             find . -maxdepth 1 ! -name '.git' -exec rm -rf {} \;
@@ -48,6 +57,7 @@ jobs:
             cd $BUILD_DIR
             git add --all
             git status
-            git commit -m "[skip ci] $(git log master -1 --pretty=%B)"
-            git push -u origin gh-pages
+            git commit --allow-empty -m "[skip ci] $(git log master -1 --pretty=%B)"
+            git push --set-upstream origin gh-pages
             echo "[deployed successfully]"
+

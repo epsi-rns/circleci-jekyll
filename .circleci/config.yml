@@ -7,13 +7,13 @@ workflows:
   version: 2
   build:
     jobs:
-      - build:
+      - buildsite:
          filters:
             branches:
               only: master
 
 jobs:
-  build:
+  buildsite:
     docker:
       # Choose Image that Support Git Worktree Command
       - image: circleci/ruby:2.4

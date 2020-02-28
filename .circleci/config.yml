@@ -47,6 +47,6 @@ jobs:
             git add --all
             echo "[status]"
             git status
-            git commit --allow-empty -m "[ci skip] $(git log master -1 --pretty=%B)"
-            git push
+            git commit --allow-empty -m "[skip ci] $(git log master -1 --pretty=%B)"
+            git push origin gh-pages
             echo "[deployed successfully]"

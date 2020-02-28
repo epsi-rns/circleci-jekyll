@@ -30,16 +30,17 @@ jobs:
           command: |
             git config user.email "ci-build@example.domain"
             git config user.name "ci-build"
-            rm -rf $BUILD_DIR && git worktree add -B gh-pages $BUILD_DIR origin/gh-pages
+            rm -rf $BUILD_DIR
+            git worktree add -B gh-pages $BUILD_DIR origin/gh-pages
       - run: bundle install
       - run: bundle exec jekyll build
       - deploy:
           name: Output Precheck
           command: |
             cd $BUILD_DIR
-            ls -lah
-            find . -maxdepth 1 ! -name '.git' -exec rm -rf {} \;
-            mv ~/source/_site/* .
+            # ls -lah
+            # find . -maxdepth 1 ! -name '.git' -exec rm -rf {} \;
+            # mv ~/source/_site/* .
             touch .nojekyll
             ls -lah
       - deploy:
@@ -47,7 +48,7 @@ jobs:
           command: |
             cd $BUILD_DIR
             git add --all
-            echo "[status]"
+            # echo "[status]"
             git status
             git commit --allow-empty -m "[skip ci] $(git log master -1 --pretty=%B)"
             git push -u origin gh-pages

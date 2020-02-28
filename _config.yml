@@ -19,6 +19,7 @@ baseurl: "/circleci-jekyll"
 timezone: Asia/Jakarta
 
 # the base hostname & protocol for your site, e.g. http://example.com
+# This wil be shown in feed.xml
 url: "http://localhost:4000"
 twitter_username: nurwijayadi
 github_username:  epsi-rns

@@ -37,6 +37,7 @@ jobs:
           name: Precheck
           command: |
             cd $BUILD_DIR
+            ls -l
             mv ~/source/_site/* .
             ls -l
             touch .nojekyll
@@ -48,5 +49,5 @@ jobs:
             echo "[status]"
             git status
             git commit --allow-empty -m "[skip ci] $(git log master -1 --pretty=%B)"
-            git push origin gh-pages
+            git push -u origin gh-pages
             echo "[deployed successfully]"

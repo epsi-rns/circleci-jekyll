@@ -48,6 +48,6 @@ jobs:
             cd $BUILD_DIR
             git add --all
             git status
-            git commit --allow-empty -m "[skip ci] $(git log master -1 --pretty=%B)"
+            git commit -m "[skip ci] $(git log master -1 --pretty=%B)"
             git push -u origin gh-pages
             echo "[deployed successfully]"

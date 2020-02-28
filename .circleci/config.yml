@@ -37,7 +37,8 @@ jobs:
           name: Precheck
           command: |
             cd $BUILD_DIR
-            ls -l
+            ls -lah
+            find . -maxdepth 1 ! -name '.git' -exec rm -rf {} \;
             mv ~/source/_site/* .
             ls -l
             touch .nojekyll

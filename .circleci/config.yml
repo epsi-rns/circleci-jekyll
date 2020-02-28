@@ -38,7 +38,7 @@ jobs:
           command: |
             cd $BUILD_DIR
             ls -lah
-            find . -maxdepth 1 ! -name '.git' -exec rm -rf {} \;
+            rm -rf *
             mv ~/source/_site/* .
             ls -l
             touch .nojekyll

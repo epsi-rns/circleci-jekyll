@@ -41,7 +41,7 @@ jobs:
             find . -maxdepth 1 ! -name '.git' -exec rm -rf {} \;
             mv ~/source/_site/* .
             touch .nojekyll
-            ls -l
+            ls -lah
       - deploy:
           name: Deploy Release to GitHub
           command: |

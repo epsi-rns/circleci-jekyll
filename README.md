@@ -1,4 +1,4 @@
-# Jekyll Bulma MD Test Drive on Travis
+# Jekyll Bulma MD Test Drive on CircleCI
 
 An example of Jekyll site using Bulma Material Design
 for personal learning purpose.
